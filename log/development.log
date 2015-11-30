@@ -1,0 +1,747 @@
+  [1m[36m (6.2ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (3.1ms)[0m  select sqlite_version(*)
+  [1m[36m (6.9ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreatePosts (20150626214026)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (3.6ms)[0m  CREATE TABLE "posts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "post" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150626214026"]]
+  [1m[35m (2.4ms)[0m  commit transaction
+Migrating to DeviseCreateAdmins (20150706162648)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+DEPRECATION WARNING: `#timestamp` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in change at /Users/dhamzeesherpa/Desktop/physhy1/db/migrate/20150706162648_devise_create_admins.rb:34)
+  [1m[35m (0.9ms)[0m  CREATE TABLE "admins" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (1.9ms)[0m  [1mCREATE UNIQUE INDEX "index_admins_on_email" ON "admins" ("email")[0m
+  [1m[35m (4.9ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_admins_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_admins_on_email' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE UNIQUE INDEX "index_admins_on_reset_password_token" ON "admins" ("reset_password_token")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150706162648"]]
+  [1m[36m (2.3ms)[0m  [1mcommit transaction[0m
+Migrating to CreateComments (20150707173545)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150707173545"]]
+  [1m[36m (2.5ms)[0m  [1mcommit transaction[0m
+Migrating to AddColumnToTableComment (20150708170550)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (3.9ms)[0m  [1mALTER TABLE "comments" ADD "body" varchar[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "comments" ADD "name" varchar
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150708170550"]]
+  [1m[35m (1.2ms)[0m  commit transaction
+Migrating to AddPostIdToComments (20150708204108)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "comments" ADD "post_id" integer
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150708204108"]]
+  [1m[35m (2.9ms)[0m  commit transaction
+Migrating to CreatePictures (20150713181321)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  CREATE TABLE "pictures" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "gallery_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150713181321"]]
+  [1m[35m (3.4ms)[0m  commit transaction
+Migrating to AddAttachmentImageToPictures (20150713182355)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "pictures" ADD "image_file_name" varchar
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "pictures" ADD "image_content_type" varchar[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "pictures" ADD "image_file_size" integer
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "pictures" ADD "image_updated_at" datetime[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150713182355"]]
+  [1m[36m (2.6ms)[0m  [1mcommit transaction[0m
+Migrating to CreateGalleries (20150713194609)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "galleries" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "event" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150713194609"]]
+  [1m[36m (2.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreateContacts (20150717174403)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "contacts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "message" varchar, "nickname" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150717174403"]]
+  [1m[36m (1.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_admins_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_admins_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_admins_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_admins_on_email' AND type='index'
+
+
+
+Started GET "/" for ::1 at 2015-10-05 12:37:38 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (2.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PagesController#home as HTML
+Completed 500 Internal Server Error in 48ms (ActiveRecord: 0.0ms)
+
+ActionView::MissingTemplate (Missing template pages/home, application/home with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:erb, :builder, :raw, :ruby, :coffee, :jbuilder]}. Searched in:
+  * "/Users/dhamzeesherpa/Desktop/physhy1/app/views"
+  * "/Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/devise-3.5.1/app/views"
+):
+  actionview (4.2.1) lib/action_view/path_set.rb:46:in `find'
+  actionview (4.2.1) lib/action_view/lookup_context.rb:121:in `find'
+  actionview (4.2.1) lib/action_view/renderer/abstract_renderer.rb:18:in `find_template'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:40:in `determine_template'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:8:in `render'
+  actionview (4.2.1) lib/action_view/renderer/renderer.rb:42:in `render_template'
+  actionview (4.2.1) lib/action_view/renderer/renderer.rb:23:in `render'
+  actionview (4.2.1) lib/action_view/rendering.rb:100:in `_render_template'
+  actionpack (4.2.1) lib/action_controller/metal/streaming.rb:217:in `_render_template'
+  actionview (4.2.1) lib/action_view/rendering.rb:83:in `render_to_body'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:32:in `render_to_body'
+  actionpack (4.2.1) lib/action_controller/metal/renderers.rb:37:in `render_to_body'
+  actionpack (4.2.1) lib/abstract_controller/rendering.rb:25:in `render'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:16:in `render'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:44:in `block (2 levels) in render'
+  activesupport (4.2.1) lib/active_support/core_ext/benchmark.rb:12:in `block in ms'
+  /Users/dhamzeesherpa/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/benchmark.rb:294:in `realtime'
+  activesupport (4.2.1) lib/active_support/core_ext/benchmark.rb:12:in `ms'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:44:in `block in render'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:87:in `cleanup_view_runtime'
+  activerecord (4.2.1) lib/active_record/railties/controller_runtime.rb:25:in `cleanup_view_runtime'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:43:in `render'
+  actionpack (4.2.1) lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+  actionpack (4.2.1) lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+  actionpack (4.2.1) lib/abstract_controller/base.rb:198:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (4.2.1) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:555:in `block (2 levels) in compile'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:505:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:505:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:92:in `_run_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:776:in `_run_process_action_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.1) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.1) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.1) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.1) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.1) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.1) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.1) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.1) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:74:in `call'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:74:in `dispatch'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:43:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:819:in `call'
+  warden (1.2.3) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.3) lib/warden/manager.rb:34:in `catch'
+  warden (1.2.3) lib/warden/manager.rb:34:in `call'
+  rack (1.6.4) lib/rack/etag.rb:24:in `call'
+  rack (1.6.4) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.4) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.1) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:649:in `call'
+  activerecord (4.2.1) lib/active_record/migration.rb:378:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:88:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:88:in `_run_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:776:in `_run_call_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.1) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.2.1) lib/web_console/middleware.rb:39:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.1) lib/rails/application.rb:164:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/dhamzeesherpa/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /Users/dhamzeesherpa/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /Users/dhamzeesherpa/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.6ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (4.7ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.7ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/missing_template.html.erb within rescues/layout (49.8ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.8ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (28.5ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.7ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (78.6ms)
+
+
+Started GET "/" for ::1 at 2015-10-05 12:38:19 -0400
+Processing by PagesController#index as HTML
+  Rendered pages/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 2556ms (Views: 2555.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/comment.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-10-05 12:38:22 -0400
+
+
+Started GET "/assets/contacts.self-215c8c182802ade797050409a216e56dd66e1bfcde3f2d3bbc05699ba0510cfb.css?body=1" for ::1 at 2015-10-05 12:38:22 -0400
+
+
+Started GET "/assets/galleries.self-e29da2a73bc83994af5cf87133eb14723dd8c0c4f9a96ce61ffe6eb764b85f22.css?body=1" for ::1 at 2015-10-05 12:38:22 -0400
+
+
+Started GET "/assets/index.self-503834e82d80b84c8bfa236931871aa0f9ac18e3e052094b1953ead4770a8a58.css?body=1" for ::1 at 2015-10-05 12:38:22 -0400
+
+
+Started GET "/assets/media.self-1cd89aa88fd99a20343e743431774c78be3fffaded832242f83e20bd10e73bb9.css?body=1" for ::1 at 2015-10-05 12:38:22 -0400
+
+
+Started GET "/assets/pages.self-34823198d620c2489af43d8d83b7151e7e58b69d418dd3dfad44f4e17bbcf3d6.css?body=1" for ::1 at 2015-10-05 12:38:22 -0400
+
+
+Started GET "/assets/pictures.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-10-05 12:38:22 -0400
+
+
+Started GET "/assets/posts.self-c1f7080f993b1c6a779fac54a3acc23cc72d8a668e86394f7c24edd69ff7c32d.css?body=1" for ::1 at 2015-10-05 12:38:22 -0400
+
+
+Started GET "/assets/application.self-dad23b35a47a75a0d91c50b088c4d1d7f817b16d996f250d57f884c9d9415bba.css?body=1" for ::1 at 2015-10-05 12:38:22 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-10-05 12:38:22 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-10-05 12:38:22 -0400
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-10-05 12:38:22 -0400
+
+
+Started GET "/assets/comment.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-10-05 12:38:22 -0400
+
+
+Started GET "/assets/contacts.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-10-05 12:38:22 -0400
+
+
+Started GET "/assets/galleries.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-10-05 12:38:22 -0400
+
+
+Started GET "/assets/jquery-2.1.3.self-0664d02dcbfb008e715c754b00b9af29d6f1796828c03610aee4265bdfc6afff.js?body=1" for ::1 at 2015-10-05 12:38:22 -0400
+
+
+Started GET "/assets/media.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-10-05 12:38:22 -0400
+
+
+Started GET "/assets/modernizer.self-340755e788d44032cb9ac5cd4a811849919e27d55573d2d2c2b554d75906af8f.js?body=1" for ::1 at 2015-10-05 12:38:22 -0400
+
+
+Started GET "/assets/pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-10-05 12:38:22 -0400
+
+
+Started GET "/assets/pictures.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-10-05 12:38:22 -0400
+
+
+Started GET "/assets/posts.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-10-05 12:38:22 -0400
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2015-10-05 12:38:22 -0400
+
+
+Started GET "/stylesheets/index.css" for ::1 at 2015-10-05 12:38:22 -0400
+
+ActionController::RoutingError (No route matches [GET] "/stylesheets/index.css"):
+  actionpack (4.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.2.1) lib/web_console/middleware.rb:39:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.1) lib/rails/application.rb:164:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/dhamzeesherpa/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /Users/dhamzeesherpa/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /Users/dhamzeesherpa/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/routes/_route.html.erb (3.1ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/routes/_table.html.erb (26.0ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.9ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (86.9ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.7ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (27.4ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.6ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (64.2ms)
+
+
+Started GET "/assets/bd.png" for ::1 at 2015-10-05 12:38:22 -0400
+
+
+Started GET "/media" for ::1 at 2015-10-05 12:38:34 -0400
+Processing by MediaController#index as HTML
+  Rendered media/index.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 77ms (Views: 75.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/sc2.png" for ::1 at 2015-10-05 12:38:34 -0400
+
+
+Started GET "/assets/fb2.png" for ::1 at 2015-10-05 12:38:34 -0400
+
+
+Started GET "/assets/li2.png" for ::1 at 2015-10-05 12:38:34 -0400
+
+
+Started GET "/assets/yt2.png" for ::1 at 2015-10-05 12:38:34 -0400
+
+
+Started GET "/assets/mail.png" for ::1 at 2015-10-05 12:38:34 -0400
+
+
+Started GET "/galleries" for ::1 at 2015-10-05 12:38:39 -0400
+Processing by GalleriesController#index as HTML
+  [1m[35mGallery Load (6.0ms)[0m  SELECT "galleries".* FROM "galleries"
+  Rendered galleries/index.html.erb within layouts/application (8.9ms)
+Completed 200 OK in 143ms (Views: 110.7ms | ActiveRecord: 6.2ms)
+
+
+Started GET "/assets/IMG_5694.JPG" for ::1 at 2015-10-05 12:38:39 -0400
+
+
+Started GET "/blog" for ::1 at 2015-10-05 12:38:41 -0400
+Processing by PostsController#index as HTML
+  [1m[36mPost Load (2.8ms)[0m  [1mSELECT "posts".* FROM "posts"  ORDER BY created_at DESC[0m
+  Rendered posts/index.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 123ms (Views: 91.3ms | ActiveRecord: 6.4ms)
+
+
+Started GET "/contacts" for ::1 at 2015-10-05 12:38:42 -0400
+Processing by ContactsController#new as HTML
+  Rendered contacts/new.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 103ms (Views: 82.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts" for ::1 at 2015-10-05 12:39:59 -0400
+Processing by ContactsController#new as HTML
+  Rendered contacts/new.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 155ms (Views: 154.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/comment.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-10-05 12:40:00 -0400
+
+
+Started GET "/assets/contacts.self-215c8c182802ade797050409a216e56dd66e1bfcde3f2d3bbc05699ba0510cfb.css?body=1" for ::1 at 2015-10-05 12:40:00 -0400
+
+
+Started GET "/assets/index.self-503834e82d80b84c8bfa236931871aa0f9ac18e3e052094b1953ead4770a8a58.css?body=1" for ::1 at 2015-10-05 12:40:00 -0400
+
+
+Started GET "/assets/galleries.self-e29da2a73bc83994af5cf87133eb14723dd8c0c4f9a96ce61ffe6eb764b85f22.css?body=1" for ::1 at 2015-10-05 12:40:00 -0400
+
+
+Started GET "/assets/media.self-1cd89aa88fd99a20343e743431774c78be3fffaded832242f83e20bd10e73bb9.css?body=1" for ::1 at 2015-10-05 12:40:00 -0400
+
+
+Started GET "/assets/pages.self-34823198d620c2489af43d8d83b7151e7e58b69d418dd3dfad44f4e17bbcf3d6.css?body=1" for ::1 at 2015-10-05 12:40:00 -0400
+
+
+Started GET "/stylesheets/index.css" for ::1 at 2015-10-05 12:40:00 -0400
+
+ActionController::RoutingError (No route matches [GET] "/stylesheets/index.css"):
+  actionpack (4.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.2.1) lib/web_console/middleware.rb:39:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.1) lib/rails/application.rb:164:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/dhamzeesherpa/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /Users/dhamzeesherpa/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /Users/dhamzeesherpa/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.3ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/routes/_route.html.erb (3.2ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.7ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.0ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (59.2ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.7ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (30.6ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.6ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.6ms)
+  Rendered /Users/dhamzeesherpa/.rvm/gems/ruby-2.1.2/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (62.3ms)
+
+
+Started GET "/assets/pictures.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-10-05 12:40:00 -0400
+
+
+Started GET "/assets/posts.self-c1f7080f993b1c6a779fac54a3acc23cc72d8a668e86394f7c24edd69ff7c32d.css?body=1" for ::1 at 2015-10-05 12:40:00 -0400
+
+
+Started GET "/assets/application.self-dad23b35a47a75a0d91c50b088c4d1d7f817b16d996f250d57f884c9d9415bba.css?body=1" for ::1 at 2015-10-05 12:40:00 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-10-05 12:40:00 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-10-05 12:40:00 -0400
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-10-05 12:40:00 -0400
+
+
+Started GET "/assets/comment.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-10-05 12:40:00 -0400
+
+
+Started GET "/assets/contacts.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-10-05 12:40:00 -0400
+
+
+Started GET "/assets/galleries.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-10-05 12:40:00 -0400
+
+
+Started GET "/assets/jquery-2.1.3.self-0664d02dcbfb008e715c754b00b9af29d6f1796828c03610aee4265bdfc6afff.js?body=1" for ::1 at 2015-10-05 12:40:00 -0400
+
+
+Started GET "/assets/media.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-10-05 12:40:00 -0400
+
+
+Started GET "/assets/pictures.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-10-05 12:40:00 -0400
+
+
+Started GET "/assets/posts.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-10-05 12:40:00 -0400
+
+
+Started GET "/assets/pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-10-05 12:40:00 -0400
+
+
+Started GET "/assets/modernizer.self-340755e788d44032cb9ac5cd4a811849919e27d55573d2d2c2b554d75906af8f.js?body=1" for ::1 at 2015-10-05 12:40:00 -0400
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2015-10-05 12:40:00 -0400
+
+
+Started GET "/assets/mail.png" for ::1 at 2015-10-05 12:40:00 -0400
+
+
+Started GET "/assets/bd.png" for ::1 at 2015-10-05 12:40:00 -0400
+
+
+Started GET "/assets/mail.png" for ::1 at 2015-10-05 12:40:00 -0400
+
+
+Started GET "/blog" for ::1 at 2015-10-05 12:40:10 -0400
+Processing by PostsController#index as HTML
+  [1m[35mPost Load (2.7ms)[0m  SELECT "posts".* FROM "posts"  ORDER BY created_at DESC
+  Rendered posts/index.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 72ms (Views: 68.7ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/galleries" for ::1 at 2015-10-05 12:40:11 -0400
+Processing by GalleriesController#index as HTML
+  [1m[36mGallery Load (0.2ms)[0m  [1mSELECT "galleries".* FROM "galleries"[0m
+  Rendered galleries/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 143ms (Views: 142.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/IMG_5694.JPG" for ::1 at 2015-10-05 12:40:12 -0400
+
+
+Started GET "/" for ::1 at 2015-10-18 12:30:12 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (2.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PagesController#index as HTML
+  Rendered pages/index.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 624ms (Views: 610.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/comment.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-10-18 12:30:13 -0400
+
+
+Started GET "/assets/contacts.self-215c8c182802ade797050409a216e56dd66e1bfcde3f2d3bbc05699ba0510cfb.css?body=1" for ::1 at 2015-10-18 12:30:13 -0400
+
+
+Started GET "/assets/galleries.self-e29da2a73bc83994af5cf87133eb14723dd8c0c4f9a96ce61ffe6eb764b85f22.css?body=1" for ::1 at 2015-10-18 12:30:13 -0400
+
+
+Started GET "/assets/index.self-503834e82d80b84c8bfa236931871aa0f9ac18e3e052094b1953ead4770a8a58.css?body=1" for ::1 at 2015-10-18 12:30:13 -0400
+
+
+Started GET "/assets/media.self-1cd89aa88fd99a20343e743431774c78be3fffaded832242f83e20bd10e73bb9.css?body=1" for ::1 at 2015-10-18 12:30:13 -0400
+
+
+Started GET "/assets/pages.self-34823198d620c2489af43d8d83b7151e7e58b69d418dd3dfad44f4e17bbcf3d6.css?body=1" for ::1 at 2015-10-18 12:30:13 -0400
+
+
+Started GET "/assets/pictures.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-10-18 12:30:13 -0400
+
+
+Started GET "/assets/posts.self-c1f7080f993b1c6a779fac54a3acc23cc72d8a668e86394f7c24edd69ff7c32d.css?body=1" for ::1 at 2015-10-18 12:30:13 -0400
+
+
+Started GET "/assets/application.self-dad23b35a47a75a0d91c50b088c4d1d7f817b16d996f250d57f884c9d9415bba.css?body=1" for ::1 at 2015-10-18 12:30:13 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-10-18 12:30:13 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-10-18 12:30:13 -0400
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-10-18 12:30:13 -0400
+
+
+Started GET "/assets/comment.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-10-18 12:30:13 -0400
+
+
+Started GET "/assets/contacts.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-10-18 12:30:13 -0400
+
+
+Started GET "/assets/galleries.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-10-18 12:30:13 -0400
+
+
+Started GET "/assets/jquery-2.1.3.self-0664d02dcbfb008e715c754b00b9af29d6f1796828c03610aee4265bdfc6afff.js?body=1" for ::1 at 2015-10-18 12:30:13 -0400
+
+
+Started GET "/assets/media.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-10-18 12:30:13 -0400
+
+
+Started GET "/assets/modernizer.self-340755e788d44032cb9ac5cd4a811849919e27d55573d2d2c2b554d75906af8f.js?body=1" for ::1 at 2015-10-18 12:30:13 -0400
+
+
+Started GET "/assets/pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-10-18 12:30:13 -0400
+
+
+Started GET "/assets/pictures.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-10-18 12:30:13 -0400
+
+
+Started GET "/assets/posts.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-10-18 12:30:13 -0400
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2015-10-18 12:30:13 -0400
+
+
+Started GET "/assets/bd.png" for ::1 at 2015-10-18 12:30:13 -0400
+
+
+Started GET "/media" for ::1 at 2015-10-18 12:35:30 -0400
+Processing by MediaController#index as HTML
+  Rendered media/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 81ms (Views: 79.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/sc2.png" for ::1 at 2015-10-18 12:35:31 -0400
+
+
+Started GET "/assets/fb2.png" for ::1 at 2015-10-18 12:35:31 -0400
+
+
+Started GET "/assets/li2.png" for ::1 at 2015-10-18 12:35:31 -0400
+
+
+Started GET "/assets/yt2.png" for ::1 at 2015-10-18 12:35:31 -0400
+
+
+Started GET "/assets/mail.png" for ::1 at 2015-10-18 12:35:31 -0400
+
+
+Started GET "/galleries" for ::1 at 2015-10-18 12:35:36 -0400
+Processing by GalleriesController#index as HTML
+  [1m[35mGallery Load (2.3ms)[0m  SELECT "galleries".* FROM "galleries"
+  Rendered galleries/index.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 129ms (Views: 71.9ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/assets/IMG_5694.JPG" for ::1 at 2015-10-18 12:35:36 -0400
+
+
+Started GET "/" for ::1 at 2015-11-29 21:25:29 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PagesController#index as HTML
+  Rendered pages/index.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 2309ms (Views: 2279.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/comment.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-11-29 21:25:32 -0500
+
+
+Started GET "/assets/contacts.self-7f8f85339501f78044b6b7d05f6cc10d1a27046ebbd19057e65699e34e33e28d.css?body=1" for ::1 at 2015-11-29 21:25:32 -0500
+
+
+Started GET "/assets/galleries.self-7d476087197c3d60ddb7b1f1ceeb9420f770adbb99aed3c87d39f46e585c739a.css?body=1" for ::1 at 2015-11-29 21:25:32 -0500
+
+
+Started GET "/assets/index.self-503834e82d80b84c8bfa236931871aa0f9ac18e3e052094b1953ead4770a8a58.css?body=1" for ::1 at 2015-11-29 21:25:32 -0500
+
+
+Started GET "/assets/media.self-f468cc64b05a3b00295940ed83af79aa36c283b3f5d4ce0af2316c8669d30af2.css?body=1" for ::1 at 2015-11-29 21:25:32 -0500
+
+
+Started GET "/assets/pages.self-6ac5649f16ab1d500c592e9e813e9a69b3e7a0892e6a9546d3b62b4201c45e30.css?body=1" for ::1 at 2015-11-29 21:25:32 -0500
+
+
+Started GET "/assets/posts.self-98b19666c525814fb274c72141650bf4c02bca729e714e7c12fc00a390cb8f8e.css?body=1" for ::1 at 2015-11-29 21:25:32 -0500
+
+
+Started GET "/assets/application.self-64739a853a917bcd0b1c945235876ec120d14945e5bd02da50e2d82b12612470.css?body=1" for ::1 at 2015-11-29 21:25:32 -0500
+
+
+Started GET "/assets/comment.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-29 21:25:32 -0500
+
+
+Started GET "/assets/jquery-2.1.3.self-0664d02dcbfb008e715c754b00b9af29d6f1796828c03610aee4265bdfc6afff.js?body=1" for ::1 at 2015-11-29 21:25:32 -0500
+
+
+Started GET "/assets/modernizer.self-340755e788d44032cb9ac5cd4a811849919e27d55573d2d2c2b554d75906af8f.js?body=1" for ::1 at 2015-11-29 21:25:32 -0500
+
+
+Started GET "/assets/bd.png" for ::1 at 2015-11-29 21:25:32 -0500
+
+
+Started GET "/" for ::1 at 2015-11-29 21:25:37 -0500
+Processing by PagesController#index as HTML
+  Rendered pages/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 231ms (Views: 229.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/media" for ::1 at 2015-11-29 21:25:39 -0500
+Processing by MediaController#index as HTML
+  Rendered media/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 226ms (Views: 224.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/sc2.png" for ::1 at 2015-11-29 21:25:40 -0500
+
+
+Started GET "/assets/fb2.png" for ::1 at 2015-11-29 21:25:40 -0500
+
+
+Started GET "/assets/li2.png" for ::1 at 2015-11-29 21:25:40 -0500
+
+
+Started GET "/assets/yt2.png" for ::1 at 2015-11-29 21:25:40 -0500
+
+
+Started GET "/assets/mail.png" for ::1 at 2015-11-29 21:25:40 -0500
+
+
+Started GET "/galleries" for ::1 at 2015-11-29 21:25:46 -0500
+Processing by GalleriesController#index as HTML
+  [1m[35mGallery Load (2.4ms)[0m  SELECT "galleries".* FROM "galleries"
+  Rendered galleries/index.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 190ms (Views: 168.1ms | ActiveRecord: 2.7ms)
+
+
+Started GET "/assets/IMG_5694.JPG" for ::1 at 2015-11-29 21:25:47 -0500
+
+
+Started GET "/blog" for ::1 at 2015-11-29 21:25:48 -0500
+Processing by PostsController#index as HTML
+  [1m[36mPost Load (2.6ms)[0m  [1mSELECT "posts".* FROM "posts"  ORDER BY created_at DESC[0m
+  Rendered posts/index.html.erb within layouts/application (7.5ms)
+Completed 200 OK in 276ms (Views: 234.0ms | ActiveRecord: 3.8ms)
+
+
+Started GET "/contacts" for ::1 at 2015-11-29 21:25:50 -0500
+Processing by ContactsController#new as HTML
+  Rendered contacts/new.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 224ms (Views: 200.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2015-11-29 21:25:52 -0500
+Processing by PagesController#index as HTML
+  Rendered pages/index.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 149ms (Views: 148.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2015-11-29 22:07:50 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (2.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PagesController#index as HTML
+  Rendered pages/index.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 1158ms (Views: 1144.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/contacts.self-d1793c996d05640d3dad0c7eed52859347ff8ea83c82478b141b21cc82bfe411.css?body=1" for ::1 at 2015-11-29 22:07:52 -0500
+
+
+Started GET "/assets/galleries.self-ca15accdfdcd00ab975734a1a94cb18a92e38db43c68bc804fb50af634c1b78e.css?body=1" for ::1 at 2015-11-29 22:07:52 -0500
+
+
+Started GET "/assets/media.self-c913b81f0777244435fc3dc9413e2687762bcbe149441b7bd44b7f1de5fb160b.css?body=1" for ::1 at 2015-11-29 22:07:52 -0500
+
+
+Started GET "/assets/pages.self-b67a3cca9299e639a1f3ec2acb82003d4aa207ed4a0fa083db62c7a6bad80ea1.css?body=1" for ::1 at 2015-11-29 22:07:52 -0500
+
+
+Started GET "/assets/posts.self-a12ebbe09e2278a99becc72072c1a70142571605ff6f00c23df431f7665d921d.css?body=1" for ::1 at 2015-11-29 22:07:52 -0500
+
+
+Started GET "/assets/application.self-8e593aeb9e50b8ff9fb9365eb09e45b3004d91e4c6c7ee28f59769aa2aa33dd1.css?body=1" for ::1 at 2015-11-29 22:07:52 -0500
+
+
+Started GET "/assets/bd.png" for ::1 at 2015-11-29 22:07:52 -0500

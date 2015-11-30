@@ -1,0 +1,103 @@
+// Place all the styles related to the galleries controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.gallerypage{
+		background: url('bd.png') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+.gallerybox{
+	width: 100%;
+	padding: 2%;
+	margin-top: 25px;
+}
+
+.galary_header{
+	margin: 0 auto;
+	font-size: 200px;
+	line-height: 250px;
+	padding: 60px 90px 30px;
+	color: rgba(255, 255, 255, 0.1);
+	font-family: Arial, sans-serif;
+	text-shadow: 10px 10px 2px rgba(0,0,0,0.2);
+	text-transform: uppercase;
+	
+	-webkit-text-stroke: 2px rgba(255,255,255,0.2);
+	
+	background-color: #fff;
+	background-repeat: no-repeat;
+	background-image: url(IMG_5694.JPG);
+	background-position: 50% 50%;
+	background-size: 100%;
+	
+	-webkit-background-clip: text;
+	/* let's assume that one day it's supported */
+	-moz-background-clip: text;
+	background-clip: text;
+
+	transition: all 0.5s linear;
+	
+	/* for now, let's just add some niceness for Firefox */
+	// -moz-border-radius: 30px;
+	// -moz-box-shadow: 0px 0px 1px 8px rgba(67, 201, 117, 0.2);	
+}
+
+
+.thumbnail {margin-bottom:6px;}
+
+.modal-body img {
+	width: 100%; 
+	margin-top: 10px;	
+  
+}
+
+.gallerytitle {
+    color: #fff;
+    margin-left: 45%;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    font-size: 1.73em;
+    font-family: 'Josefin Sans', sans-serif;
+    &:hover {
+      color: #E5C454;
+      text-decoration: none;
+    }
+  }
+
+.eventtitle{
+	color: rgba(255, 255, 255, 0.8);
+	font-size: 30px;
+	text-align: center;
+	font-family: 'Poiret One', sans-serif;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+
+@media all and (min-width: 300px)and (max-width: 700px){
+	.galary_header {
+    margin: 0 auto;
+    font-size: 50px;
+    line-height: 50px;
+    padding: 30% 20%;
+    color: rgba(255, 255, 255, 0.1);
+    font-family: Arial, sans-serif;
+    text-shadow: 10px 10px 2px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.2);
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-image: url(IMG_5694.JPG);
+    background-position: 50% 50%;
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    transition: all 0.5s linear;
+}
+}
+
+ 

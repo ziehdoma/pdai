@@ -1,0 +1,196 @@
+body {
+	margin: 0;
+		background: url('bd.png') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.header {
+	width: 100%;
+	margin: 0 auto;
+}
+
+#music {
+	background: url('bd.png') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+	width: 100%;
+	margin: 0;
+  text-align: center;
+}
+
+.navname {
+	font-family: 'Poiret One', sans-serif !important;
+	color: #fff;
+	font-size: 4.5em;
+	text-align: center;
+	text-transform: uppercase;
+	padding-top: 50px;
+	margin: 50px 0 50px 0;
+}
+
+.music_title {
+	color: #fff;
+	font-family: 'Poiret One', sans-serif !important;
+	margin-bottom: 50px;
+	text-align: center;
+	padding-top: 40px;
+	font-size: 3em;
+	text-transform: uppercase;
+}
+
+.about {
+	color: #fff;
+	margin-top: 150px;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.about_title {
+	color: #fff;
+	font-family: 'Poiret One', sans-serif !important;
+	margin-top: 50px;
+	text-align: center;
+	padding-top: 50px;
+	font-size: 3em;
+	text-transform: uppercase;
+}
+
+#bio {
+	margin: 0 auto;
+		margin-bottom: 50px;
+	color: #fff;
+	font-family: 'Josefin Sans', sans-serif !important;
+	font-size: 1.5em;
+	text-indent: 0.5em;
+	padding-top: 20px;
+	width: 30%;
+}
+
+#contact {
+	height: 350px;
+	margin-top: 50px;
+}
+
+.contact_title {
+	color: #fff;
+	font-family: 'Poiret One', sans-serif !important;
+	margin: 0 auto;
+	text-align: center;
+	padding-top: 50px;
+	font-size: 3em;
+	text-transform: uppercase;
+}
+
+#email {
+	color: #fff;
+	font-family: 'Josefin Sans', sans-serif !important;
+	font-size: 1.5em;
+	margin: 0 auto;
+	text-align: center;
+	padding-top: 25px;
+}
+
+#email_two {
+	color: #fff;
+	font-family: 'Josefin Sans', sans-serif !important;
+	font-size: 1.5em;
+	margin: 0 auto;
+	text-align: center;
+	padding-top: 25px;
+}
+
+.social {
+	margin: 0 auto;
+	padding: 50px 0px 50px 20px;
+	width: 100%;
+}
+
+.slinks {
+	padding-right: 10px;
+	height: 60px;
+	width: 70px;
+}
+
+.naming {
+	color: #E5C454;
+	float: left;
+	font-family: 'Josefin Sans', sans-serif !important;
+	text-transform: uppercase;
+	letter-spacing: .1em;
+	font-size: 1.7em;
+	padding: 10px 0 10px 50px;
+}
+
+.navlist {
+	background-color: rgba(0, 0, 0, 0.3);
+	margin: 0;
+	display: inline;
+	z-index: 10000 !important;
+	position: fixed !important;
+	width: 100%;
+}
+
+.ulist {
+	list-style-type: none;
+	color: #fff !important;
+	margin: 0;
+}
+
+.appnav {
+	color: #fff !important;
+	font-family: 'Josefin Sans', sans-serif !important;
+	font-size: 1.3em;
+	display: inline;
+	padding-right: 25px;
+	float: right;
+	text-transform: uppercase;
+	padding-top: 10px;
+	padding-bottom: 5px;
+}
+
+.appnav a {
+	color: #fff !important;
+}
+
+.appnav a:link, .appnav a:visited {
+	text-decoration: none;
+}
+
+.appnav a:hover, .appnav a:active {
+	color: #E5C454 !important;
+}
+
+.footernav {
+	width: 100%;
+	background-color: #000 !important;
+	color: red;
+	bottom: 0;
+	position: fixed;
+	display: inline;
+	padding: 10px;
+}
+
+.notice {
+background-color: #000;
+color: #fff;
+margin: 0 auto !important;
+padding: 0 !important;
+}
+
+.alert {
+background-color: #000;
+color: #fff;
+margin: 0 auto !important;
+padding: 0 !important;
+}
+
+@media all and (max-width: 400px)  {
+}
+
+
+

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shyangden Phiroj</title>
+  <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:100' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css">
+
+
+<!-- Optional theme -->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- <link href="css/bootstrap.lightbox.css" rel="stylesheet" media="screen">
+<script src="js/bootstrap.lightbox.js"></script> -->
+
+</head>
+
+<body>
+
+          <div class="navlist">
+            <span class="naming">Shyangden Phiroj</span>
+            <ul class="ulist">
+              <li class="appnav"><%= link_to "Contact", contacts_path %></li>
+              <li class="appnav"><%= link_to "News & Announcements", blog_path %></li> 
+              <li class="appnav"><%= link_to "Gallery", galleries_path %></li> 
+              <li class="appnav"><%= link_to "Media", media_path %></li> 
+              <li class="appnav"><%= link_to "Home", '/' %></li> 
+            </ul>
+          </div>
+<!--   <div class="header" id="header-container">	
+    <nav class="navbar navbar-default">
+      <div class="conatiner">
+        <div class="navbar-header"> -->
+
+<!--           <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> 
+    
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span> -->
+            
+<!--           </a>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right"> -->
+
+
+<!--         </div>
+      </div>
+    </nav>
+  </div> -->
+				
+	<%= yield %>
+
+    <footer id="footernav">
+    	<% if current_admin %>
+    	 <%= link_to 'logout', destroy_admin_session_path, method: :delete %>
+    	<% end %>
+    </footer>
+
+
+    <p class="notice"><%= notice %></p>
+	  <p class="alert"><%= alert %></p>
+    </body>
+</html>
+

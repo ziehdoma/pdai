@@ -1,0 +1,69 @@
+// Place all the styles related to the contacts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+ 
+
+
+
+.contactpage{
+	background: url('bd.png') no-repeat center center fixed; 
+	// background-color: #000;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+.contactbox{
+	width: 100%;
+	margin: 0 auto;
+	margin-top: 150px;
+}
+
+.contact_title {
+	font-family: 'Poiret One', sans-serif !important;
+	letter-spacing: .2em;
+	text-align: center;
+}
+
+.mailto {
+	height: 60px;
+	width: 70px;
+	margin: 0 auto;
+}
+
+.socialspan {
+	margin-left: 25%;
+}
+
+.slinks {
+	margin: 50px;
+	padding-right: 50px;
+	width: 90px;
+	height: 80px;
+}
+
+.contactheader{
+	text-align: center;
+	color: #fff;	
+	font-size: 30px;
+	font-family: 'Josefin Sans', sans-serif;
+	padding: 10px;
+
+}
+
+
+@media all and (max-width: 300px)  {
+.message-form{
+
+	margin-left: 0px;	
+}
+.contactheader{
+	color: #cd6839;	
+	font-size: 30px;
+
+}
+}
+
