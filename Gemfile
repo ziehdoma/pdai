@@ -39,11 +39,19 @@ gem 'actionpack', '~> 4.2.1'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use Unicorn as the app server
-# gem 'unicorn'
+gem 'capistrano'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+# rails specific capistrano funcitons
+gem 'capistrano-rails'
+
+# integrate bundler with capistrano
+gem 'capistrano-bundler'
+
+# if you are using RBENV
+gem 'capistrano-rbenv'
+
+# Use the Unicorn app server
+gem 'unicorn'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
