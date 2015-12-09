@@ -745,3 +745,13 @@ Started GET "/assets/application.self-8e593aeb9e50b8ff9fb9365eb09e45b3004d91e4c6
 
 
 Started GET "/assets/bd.png" for ::1 at 2015-11-29 22:07:52 -0500
+
+
+Started GET "/" for ::1 at 2015-12-09 09:42:25 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (2.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PagesController#index as HTML
+  Rendered pages/index.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 663ms (Views: 644.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/bd.png" for ::1 at 2015-12-09 09:42:26 -0500
